@@ -1,0 +1,56 @@
+
+Working with the django froms:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    >> Login, enquiry, registration 
+
+    Advantages of the Django Froms:
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        1. We can develop froms very easily witht the python code 
+        2. We can generate html widgets/component very easily 
+        3.Validation becomes very easy 
+        4. Processing the data into the python data structure like list, dict etc will become very easy 
+        5. Creation of model based from is very easy 
+
+        model class --> converted into the database table 
+        from class --> converted into html from 
+
+        Process to generate django from
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```
+
+        models.py 
+        ~~~~~~~~
+        class Employee(models.Model):
+            name=models.CharFiled(max_length=30)
+            marks=models.IntegerFiled()
+
+1. Creation of from.py file in our application folder our required fileds
+
+from django import froms
+class StudentFrom(froms.Form):
+    name=models.CharFiled()
+    marks=models.IntegerFiled()
+
+2. Usage of fom.py inside views.py file;
+
+def studentInputview(request):
+    from=StudentFrom()
+    my_dict={'from':from}
+    return render(request, 'testapp/input.html', context=my_dict)
+    return render(request, 'testapp/input.html', my_dict)
+    return render(request, 'testapp/input.html', {'form: form})
+
+3. input.html
+~~~~~~~~~~~~``
+
+<form method='post'>
+    {{form}}
+</form>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``New fromproject~~~
+frompro
+
+~~~~~~~~~~~~~~~~````
+{{form}}
+{{form.as_p}}
+~~~~~~~~~~~~~~~~~~~~

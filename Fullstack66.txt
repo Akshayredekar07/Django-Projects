@@ -1,0 +1,30 @@
+
+MVT Architecture:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+view ---->function/class ----> business logic ----> python code
+
+template ------>presentation logic (logic)
+
+model -----> releted to database
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+to genrate teh fake data for the testing purpose:
+
+use faker module:
+
+pip install faker
+
+from faker import faker
+
+fakegen=Faker()
+name=fakegen.name()
+print(name)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
+
+StudentInfoProject 
+

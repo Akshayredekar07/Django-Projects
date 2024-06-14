@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durga News Portal</title>
+    <link rel="stylesheet" href="{% static 'css/jobs1.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ head_msg }}</h1>
+
+        <ul class="news-list">
+            <li>{{ m1 }}</li>
+            <li>{{ m2 }}</li>
+            <li>{{ m3 }}</li>
+            <li>{{ m4 }}</li>
+            <li>{{ m5 }}</li>
+        </ul>
+
+        {% if type == 'Movies' %}
+        <div class="image-row">
+            <img src="{% static 'images/1.jpg' %}" alt="Movie Image 1">
+            <img src="{% static 'images/2.jpg' %}" alt="Movie Image 2">
+            <img src="{% static 'images/3.jpg' %}" alt="Movie Image 3">
+            <img src="{% static 'images/4.jpg' %}" alt="Movie Image 4">
+        </div>
+        {% elif type == 'Sports' %}
+        <div class="image-row">
+            <img src="{% static 'images/5.jpg' %}" alt="Sports Image 1">
+            <img src="{% static 'images/6.jpg' %}" alt="Sports Image 2">
+            <img src="{% static 'images/7.jpg' %}" alt="Sports Image 3">
+            <img src="{% static 'images/8.jpg' %}" alt="Sports Image 4">
+        </div>
+        {% elif type == 'Politics' %}
+        <div class="image-row">
+            <img src="{% static 'images/9.jpg' %}" alt="Politics Image 1">
+            <img src="{% static 'images/10.jpg' %}" alt="Politics Image 2">
+            <img src="{% static 'images/11.jpg' %}" alt="Politics Image 3">
+            <img src="{% static 'images/12.jpg' %}" alt="Politics Image 4">
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

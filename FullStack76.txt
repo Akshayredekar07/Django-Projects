@@ -1,0 +1,84 @@
+
+
+##
+Django provides several inbuit validators to perform very common  validation
+we can use driectly and we are not responsible to implement those.
+All inbuit validations present in django.core module 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+from django import forms
+## import inbulit validators
+
+from django.core import validators
+
+class FeedbackForm(forms.Form):
+    name=forms.CharField()
+    rollno=forms.IntegerField()
+    email=forms.EmailField()
+    feedback=forms.CharField(widget=forms.Textarea, validators=[validators.MaxLengthValidator(40), validators.MinLengthValidator(10)])
+
+
+~~~~~~~~~~~~~~~How to implement the custom validators parameters
+
+the name should starts with 'd'
+
+
+~~~~::: validation of total form dirctly by using single clean methods
+
+
+
+from django.core import validators
+
+
+#custom validators
+def starts_with_d(value):
+    print("starts_with_d is validated successfully")
+    if value[0].lower() != 'd':
+        raise forms.ValidationError('Name should starts with d')
+    
+
+def gmail_validator(value):
+    print('Checking gmail validation')
+    if value[-10:] != '@gmail.com':
+        raise forms.ValidationError('mail extension should be gmail.com')
+
+class FeedbackForm(forms.Form):
+    name=forms.CharField(validators=[starts_with_d])
+    rollno=forms.IntegerField()
+    email=forms.EmailField(validators=[gmail_validator])
+    feedback=forms.CharField(widget=forms.Textarea, validators=[validators.MaxLengthValidator(40), validators.MinLengthValidator(10)])
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+class FeedbackForm(forms.Form):
+    name = forms.CharField()
+    rollno = forms.IntegerField()
+    email = forms.EmailField()
+    feedback = forms.CharField(widget=forms.Textarea)
+
+    def clean(self):
+        print("Total form validation")
+        total_cleaned_data = super().clean()
+        print("total cleaned data", total_cleaned_data)
+
+        inputname = total_cleaned_data["name"]
+        if inputname[0].lower() != "d":
+            raise forms.ValidationError("Name should starts with d")
+        print("Checking gmail validation")
+
+        inputemail = total_cleaned_data["email"]
+        if inputemail[-10:] != "@gmail.com":
+            raise forms.ValidationError("mail extension should be gmail.com")
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+field level clean method 
+
+clean_password():
+
+
+clean_rpassword():
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

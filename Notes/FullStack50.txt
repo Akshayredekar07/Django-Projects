@@ -1,0 +1,106 @@
+1.Create a project
+    >> django-admin startproject FirstProject
+
+2.Create an application
+    cd FirstProject
+    >> python manage.py startapp testapp
+
+3.Add that application inside settings.py
+    >>  INSTALLED_APPS = [
+                "django.contrib.admin",
+                "django.contrib.auth",
+                "django.contrib.contenttypes",
+                "django.contrib.sessions",
+                "django.contrib.messages",
+                "django.contrib.staticfiles",
+                "testapp"
+            ]
+
+views.py
+4.Define view function inside view.py 
+# request is must be passed in the function if not passed here then server giver error
+    >>  def greeting(request):
+            <h1>Welcome to DURGA django classes purely nursey level classes</h1>
+            return HttpResponse(s)
+
+urls.py
+5.Define urlpatterns for view inside urls.py file 
+    >> This url for the end users 
+
+        from django.url import path
+        from testapp import view
+        urlpatterns[
+            ....
+            path("hello/", views.display)
+        ]
+
+6.runserver
+    >> python manage.py runserver
+
+7.send request
+    >> http://127.0.0.1:8000/hello
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+When the application is not created in the project then this url works correctly   
+http://127.0.0.1:8000 
+
+If we created the application inside the django project then use the specific url for the HttpRequest
+http://127.0.0.1:8000/admin
+http://127.0.0.1:8000/hello
+
+If we are not assigining the path then it will works : not passing anything
+path("", views.display)
+http://127.0.0.1:8000
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Develop web application which will provide current server time?
+
+1.Creation of django project 
+2.Create django application
+    python manage.py startapp demoapp
+3.Add application to settings.py
+    INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "demoapp"
+    ]
+
+4.Creation of view function
+    def time_info_view(request):
+    time=datetime.datetime.now()
+    s='<h1>Hello current date and time: '+str(time)+ '</h1>'
+    return HttpResponse(s)
+
+5.Define urlpatterns inside urls.py 
+from demoapp import views
+urlpatterns[
+            ....
+            path("datetime/", views.time_info_view)
+        ]  
+
+5.Run server releted to the secondproject   
+    cd secondproject
+    >> python manage.py runserver     
+
+6.Send the request with correct url pattern 
+http://127.0.0.1:8000/time
+http://localhost:8000/time
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::Notes:
+
+Single application, but multiple views
+Single project but multiple application
+
+Defining urlpatterns at application level  instead of project level 

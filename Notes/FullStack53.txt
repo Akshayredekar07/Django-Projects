@@ -1,0 +1,78 @@
+
+View meant for business logic
+Templates meants for the presentation logic
+
+1. Define URL patterns at the application level for better organization and maintainability.
+
+2.Create a new Django app and define URL patterns in the urls.py file.
+
+3.Define corresponding views in the views.py file.
+
+4.Include the new app's URL patterns in the project's urls.py file.
+
+5.Reuse the app inside another application by including its URL patterns in the new application's urls.py file.
+
+6.It is highly recommended to define URL patterns inside the application level for better code structure and reusability.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+django-admin startproject baseproject
+
+cd baseproject
+
+python manage.py startapp testapp 
+
+Create the urls.py file in the testapp application and define URL patterns
+
+inlcue the urls of application level to projevt level urls
+    from django.urls import path , include 
+    from testapp import urls  
+
+project level urls:::::
+from django.urls import path , include 
+from testapp import urls  
+# this is importtant #canyou inculde all urls of testaapp urls
+# not recommended tp define it it the project level
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path('testapp/', include('testapp.urls')),
+] 
+
+
+:::  
+http://127.0.0.1:8000/testapp/first
+
+    >>Project level urls.py : Identify the corresponding urls.py file in the testapp application 
+
+    >>Application level urls : It will idnetify view function and execute that view function, provide required response 
+
+    name not need to the urls.py but recommed to use the urls.py for better redability
+
+:::::::::::
+1. start the project
+2. create app application 
+3. add application in the setttings.py 
+4. define the views functinos insdie the view.py
+5.create the urls.py file inside the application and define all required urls for our view functions 
+
+application level:~~~~~~~~~
+from django.urls import path 
+from . import views
+
+urlpatterns = [
+    path("first/", views.first_view),
+    path("sec/", views.second_view),
+    path("third/", views.third_view),
+    path("four/", views.four_view),
+    path("fifth/", views.fifith_view),
+]
+
+
+advantages:::
+    prompotes to the reusability of django application across Multiple projects
+    2. project level urls.py file will be clean and more readable 
+    3. maintainability of the project will imporved 
+    
+
+    :: 
+    http://127.0.0.1:8000/testapp/attendane

@@ -1,0 +1,41 @@
+Privious
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create a project and app:
+
+Use the commands startproject and startapp to create a new Django project and app.
+Configure the app in settings.py:
+
+Add the created app to the INSTALLED_APPS list in your project's settings.py file.
+Define URL patterns:
+
+Create URL patterns in your project's urls.py file and app's urls.py file (optional) to map URLs to views.
+Run the development server:
+
+Use the runserver command to start the Django development server.
+Create a templates folder:
+
+Create a templates folder inside your app's directory to store HTML templates.
+Configure template settings:
+
+Add template configurations to your project's settings.py file to specify the location of the templates folder.
+Render a template from a view:
+
+In your app's views.py file, create a view function that renders an HTML template using the render function.
+Pass data to the template (optional):
+
+The view function can pass data to the template context which can then be accessed and used in the template.
+Create a static folder:
+
+Create a static folder inside your app's directory to store static files like images, CSS, or JavaScript.
+Configure static file settings:
+
+Add static file configurations to your project's settings.py file to specify the location of the static folder and URL prefix.
+Load and use static files in templates:
+Use the {% load static %} template tag to load the staticfiles library and then use the {% static 'path/to/your/file.jpg' %} 
+template tag to reference static files in your templates.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+DurgaNewsProject 
+

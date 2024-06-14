@@ -1,0 +1,145 @@
+MVC:
+The Controller handles user input and updates the Model and View accordingly.
+The View displays the data from the Model.
+The Model represents the application data and business logic.
+MVC focuses on managing the state and synchronization between the components.
+
+MVT:
+The View handles the user request and returns the HTTP response.
+The Template renders the HTML to be displayed to the user.
+The Model represents the application data, similar to MVC.
+MVT is more focused on the stateless request-response cycle of web development, with less emphasis on managing state.
+
+To develop Template based project 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Create a project
+    django-admin startproject templateProject2
+
+2. Create an application
+    cd templateProject2 
+    python manage.py startapp templateapp
+
+3. Add application in settings.py 
+
+4. Inside main project folder, create a seperate folder named with the templates  
+    | Inside templates folder create a folder to sotre the  templateapp specific 
+
+5. templateProject2
+        >>templates
+            >>templateapp
+                >>All templates files of templateapp 
+            >>testapp
+                >>All templates files of testapp  
+
+6. Update django about our the templates file by adding templetes folder location Inside settings.py       
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+    main project folder location: C:\Users\Akshay\Documents\ALL Folders\DSJ\templateProject2\templateProject2\templates 
+
+We have to specifiy this location programitically 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR=BASE_DIR/'templates'
+
+
+from django.shortcuts import render
+
+# Create your views here.
+def wish_view(request):
+    return render(request, 'templateapp/wish.html')
+
+
+rendering means the converting html nto the HttpResponse
+
+8. Define the urlpattern either at application level or at project level 
+9. start erver 
+10. send request 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+view vs templates
+
+views.py contains business logic 
+templates files contains presentation logic 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+from python views.py, we can inject dynamic content to the template file by using the template tags       
+
+template tags known as template variables 
+
+Takes the special care about template tags. It is neither python syntax nor html syntax 
+
+It it jinja2 syntax 
+
+
+--------          templates tags              ---------------
+view.py             ~~~~~~~~~~~>>              jinja2 syntax 
+--------                                      ---------------
+
+Template tag syntax for inserting the text data: {{ msg }} 
+
+
+Application to send the date and time from views.py to template fie :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject Tp3
+
+    cd Tp3 
+    python manage.py startapp Ta 
+
+    Add Ta application in the 
+
+    Create the template folder at the application level and 
+    create Ta folder inside the template folder 
+
+     from pathlib import Path
+
+    # Build paths inside the project like this: BASE_DIR / 'subdir'.
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    TEMPLATES_DIR = BASE_DIR / 'templates'
+
+    TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [TEMPLATES_DIR],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
+
+
+    python manage.py runserver 
+
+
+# Create your views here.
+def datetime_view(request):
+    date=datetime.datetime.now()
+    my_dict={"msg":date}
+    return render(request, 'Ta/datetime.html', context=my_dict)
+
+
+    Alternateive
+    ~~~~~~~~~~~~~~~
+# Create your views here.
+def datetime_view(request):
+    date=datetime.datetime.now()
+    my_dict={"msg":date}
+    return render(request, 'Ta/datetime.html', my_dict)
+
+
+~~~~~also acceptable
+def datetime_view(request):
+    date=datetime.datetime.now()
+    return render(request, 'Ta/datetime.html, {"msg":date})
+
+

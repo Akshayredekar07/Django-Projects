@@ -1,0 +1,13 @@
+
+.container{
+    margin: auto;
+}
+
+h1{
+    text-align: center;
+    margin: 20px;
+}
+
+body {
+    background: url('../images/image.png');
+}

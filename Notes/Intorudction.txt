@@ -1,0 +1,168 @@
+
+Django project = multiple application + configuration information
+
+1. django-admin startproject FirstProject
+
+FirstProject
+    |- manage.py (to run server, to create application)
+    |- FirstProject
+        |- settings.py
+        |- urls.py
+        |- wsgi.py
+        |- asgi.py
+        |- __init__.py 
+
+2. python manage.py runserver
+(default port number 8000)
+http://127.0.0.1:8000/
+
+
+3. Creation of first application
+command: python manage.py startapp appname
+
+        python manage.py startapp testapp
+            |- application name: testapp
+            |- project name: FirstProject
+
+python manage.py startapp testapp
+
+C:.
+│   db.sqlite3
+│   manage.py
+│
+├───FirstProject
+│   │   asgi.py
+│   │   settings.py
+│   │   urls.py
+│   │   wsgi.py
+│   │   __init__.py
+│   │
+│   └───__pycache__
+│           settings.cpython-311.pyc
+│           urls.cpython-311.pyc
+│           wsgi.cpython-311.pyc
+│           __init__.cpython-311.pyc
+│
+└───testapp
+    │   admin.py
+    │   apps.py
+    │   models.py
+    │   tests.py
+    │   views.py
+    │   __init__.py
+    │
+    └───migrations
+            __init__.py
+
+
+
+testapp
+    │   admin.py -->model concept and admin configuration
+    │   apps.py  -->application specific configurations
+    │   models.py -->to define model class
+    │   tests.py -->to write test cases
+    │   views.py -->towrite view functions
+    │   __init__.py  -->to consider the container folder as python pkg
+    │
+    └───migrations -->database specific information 
+            __init__.py -->to consider the migrations folder as python pkg
+
+
+
+Important things are:
+    django-admin startproject FirstProject
+        settings.py
+        urls.py
+        manage.py 
+    python manage.py startapp testapp
+        view.py
+
+
+Activities required for the application
+
+    1. we have to add our application in settings.py 
+
+    INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "testapp"
+    ]
+
+    2. create views for our application to provide required functionality inside views.py file, which is present in our application.
+    views.py- it it the part of application not project
+    input for view-> HttpRequest
+    output for view-> HttpResponse
+    Two ways to create views
+        1. Function Based views(FBVs)
+        1. Class Based views(CBVs)
+
+    a. Function Based views(FBVs):
+        we have to define view Function which is responsible to provide required response to the end users
+
+
+    
+created a project
+created an application
+add that application inside settings.py
+define view function inside view.py 
+
+
+# Create your views here.
+def display(request):
+    s = "<h1>Welcome to DURGA django classes purely nursey level classes </h1>"
+    return HttpResponse(s) 
+
+Each view should take atleast one argument: request
+Each view should return HttpResponseobject with our required response 
+
+
+2. Define url-pattern for our view function inside urls.py 
+ursl.py -> it is the project level  file
+
+# Example
+from django.contrib import admin
+from django.urls import path 
+from testapp import views
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("hello/", views.display),   
+]
+
+In old versions, instead of path() functions we have to use the url() functions
+
+
+created a project
+created an application
+add that application inside settings.py
+define view function inside view.py 
+define urlpatterns for view inside urls.py file 
+runserver
+send request
+http://127.0.0.1:8000/hello 
+        |-> web server will get request
+        |-> open urls.py and identify the corresponding view function
+        |-> execute the view function and return HttpResponse to the end user
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Django provides the inbuilt webserver for the request response
+
+webservers:
+    |- Django inbuilt
+    |- tomcat
+    |- weblogic
+    |- websphere
+    |- jboss
+    |- resin
+    |- jetty
+
+for every django project there are some applications are added by the django itself    

@@ -1,0 +1,134 @@
+
+Working with models and database:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+{{ msg }}
+{% static %}
+
+
+To store data and to retrive stored data 
+    >> requirements in web application
+    Example: 
+        gmail >> username and passward
+        bank application >> transaction information
+
+Django provies inbuilt support for database operations
+inbuilt database >>sqlite3
+
+For small and medium applications this database is good but not for the realtime large scale application
+
+CRUD operations 
+C >> Create data(insert operation)
+R >> Retrive(select)
+U >> Update(update)
+D >> Delete
+
+
+SQL Queries
+    >> We have to write python cdoe for db operations
+    PDBC concept >> requires Queries
+    Django >> We are not required to write sql queries 
+    ORM >> Django handle it automatically
+
+
+Database Configuration:~
+
+    settings.py:~
+        1. Adding application name in the installed applications 
+        2. Templates Configuration
+        3. Static files Configuration
+        4. Database Configuration
+
+
+    If we are using default database, we are not required to do any new settings.     
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ModelProject~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+If we dont want sqlite3, then we have to configure our own database with the following:
+
+1.ENGINE: Name of the database engine 
+2.NAME: Database name
+3.USER: Database login username
+4.PASSWARD: Database login passward
+5.HOST: The machine on which database server is running 
+6.PORT: The port number on which database server is running.
+
+    PORT numbers:
+    >> MYSQL:  3306
+    >> ORACLE: 1502
+    >> POSTGRESSQL: 5432
+    >> MONGODB: 27017
+
+    >> Most of the times the HOST and PORT number is optional
+
+How to check the django database connection:~
+Open the shell:
+
+    ~ py manage.py shell
+    ~ from django.db import connection
+    ~ c = connection.cursor()
+
+    >> If we are not gettting the error means our datbase configuration are proper.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Configuration of MYSQL database
+
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "durgadb",
+        "USER": 'root',
+        "PASSWARD": 'root',
+        "HOST": 'localhost',
+        "PORT": 3306
+    }
+}
+
+It give error: 
+
+~ pip install mysqlclient 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Oracle configuration
+
+Open >> sqlplus >> type query ~ select * from golbal_name;
+
+~GLOBAL_NAME
+------------
+XE
+
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.oracle",
+        "NAME": "XE",
+        "USER": 'system',
+        "PASSWARD": 'durga',
+        "HOST": 'localhost',
+        "PORT": 1521
+    }
+}
+
+-----------------------------------------
+pip install djongo pymongo
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'your_database_name',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017',
+        }
+    }
+}
+

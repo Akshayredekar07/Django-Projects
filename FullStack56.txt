@@ -1,0 +1,148 @@
+Working with static files 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We have to insert normal text data into templates by using the templates tags
+We have to insert static files likes images, css files tc insude templates files 
+
+Process to include static files inside templates
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Create a folder named with the static inside the main project 
+2. Create that static folder, Create images folders to place image files 
+3. Add staq directory path to settings,py so that django can aware about our images.
+
+
+
+``````````````````````````````````````````````````
+1. Project name: SataticFilesProject 
+
+2. Application name: testapp 
+
+3. Add Application in settings.py file 
+    >> Add templates dir path 
+    ````````````````````````````````````````
+    >> Create the static dit path 
+        STATIC_DIR = BASE_DIR/'static'
+    >> Add this in below staticfile_dir
+            STATIC_URL = "static/"
+            STATICFILES_DIRS = [STATIC_DIR, ]    
+
+    >> this name is always STATICFILES_DIRS
+    ``````````````````````````````````````````
+
+http://127.0.0.1:8000/static/images/car.jpg
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The file structure shoud be 
+
+C:.
+│   db.sqlite3
+│   manage.py
+│
+├───SataticFilesProject
+│   │   asgi.py
+│   │   settings.py
+│   │   urls.py
+│   │   wsgi.py
+│   │   __init__.py
+│   │
+│   └───__pycache__
+│           settings.cpython-311.pyc
+│           urls.cpython-311.pyc
+│           wsgi.cpython-311.pyc
+│           __init__.cpython-311.pyc
+│
+├───static
+│   └───images
+│           car.jpg
+│           raje.jpg
+│
+├───templates
+│   └───testapp
+└───testapp
+    │   admin.py
+    │   apps.py
+    │   models.py
+    │   tests.py
+    │   views.py
+    │   __init__.py
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+http://127.0.0.1:8000/static/images/car.jpg
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+5. Use the templates tag to insert images 
+    >> At the beginning of html just after <!DOCTYPE html>, we have to include the following templates tag:
+
+    {% load static %}    --->In new versions 
+    {% load staticfiles %}   ---> In old version 
+
+    >> We are conveying Django to load all static files 
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello friends, The shortcut way to see the divine on the earth: </h1>
+    <h2>The Available car models are: </h2>
+    <ul>
+        <li>{{ B1 }}</li>
+        <li>{{ B2 }}</li>
+        <li>{{ B3 }}</li>
+    </ul>
+    <img src="{% static "images/car.jpg" %}" alt="Oops Image not found!">  
+</body>
+</html>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def car_views(request):
+    brands = {'B1': 'RangeRover', "B2":"Mustang", "B3": "Rolles royals"}
+    return render(request, 'testapp/index.html', context=brands)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Defining the urlspatterns at the Application level 
+
+from django.urls import path 
+from . import views 
+
+urlpatterns = [
+    path('cars/', views.car_views),
+]
+
+
+
+Add this in project level urlpath
+
+from django.urls import path, include
+from testapp import views
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("testapp/", include('testapp.urls')),
+]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+``````````````````````````
+Durgasoft News Portal 
+```````````````````````````
+NewsProject
+testapplication
+
+   

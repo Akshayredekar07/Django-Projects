@@ -1,0 +1,115 @@
+
+    DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "employeedb",
+        "USER": 'root',
+        "PASSWARD": 'root',
+        "HOST": 'localhost',
+        "PORT": 3306
+    }
+}
+
+?check the configurations:
+
+~ py manage.py shell
+    ~ from django.db import connection
+    ~ c = connection.cursor()
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    for oracle configurations
+    >> pip install cx_Oracle    
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Model class
+
+   Model is python class which contains the DATABASES infromations
+    ~Model contains fields and behaviour of data what we are storing 
+        >> Each model maps to one database table.
+        >> Every model is a python class which is the child class
+        of django.db.models.Model class 
+
+>> Each attribute of the model represents database fields(column name in table)
+
+
+We have to write all model in models.py 
+
+    class Employee(models.Model):
+        eno=models.IntegerField()
+        ename=models.CharField(max_length=30)
+        esal=models.FloatField()
+        eaddr=models.CharField(max_length=30)
+
+note: this model class will be converted into database table . django is responsible for this conversion 
+
+table name: appname_modelclassname
+            :testapp_employee
+
+fields: eno, ename, esal, eaddr. && one extra field: id 
+
+behaviour: eno is integer type, 
+            ename is of string type and max_length is 30
+
+
+Conveting model class into database specific sql code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+migration:
+
+
+
+python code -------------> Database specific code-------->table
+                            [sql code]
+                ^                                   ^
+                |                                   |
+            makemigrations                          migrate
+
+
+````````````````````````````````````````````````````````````````
+How to see the corresponding sql code for migrations
+```````````````````````````````````````````````````````````
+  PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject> python manage.py makemigrations
+Migrations for 'testapp':
+  testapp\migrations\0001_initial.py
+    - Create model Employee
+PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject>  
+             
+~~~`
+PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject>  python manage.py sqlmigrate testapp 0001           
+--
+-- Create model Employee
+--
+CREATE TABLE `testapp_employee` (`id` bigint AUTO_INCREMENT NOT NULL PRIMARY KEY, `eno` integer NOT NULL, `ename` varchar(30) NOT NULL, `esal` double precision NOT NULL, `eaddr` varchar(30) NOT NULL);
+
+'''''''''''''''''''''''''''''''''''''''''''''
+python manage.py makemigrations
+
+python manage.py sqlmigrate testapp 0001 
+'''''''''''''''''''''''''''''''''''''''''''''
+
+id field::~~
+1. For every table django will generate a special column named with id
+
+2. id is primary key.(unique value for every record)
+
+3. It is AUTO_INCREMENT field, while inserting data we are not required to provide value for this field
+
+4.This field is of type: BigAutoField
+5. We can override behaviour of id filed and we can make our own filed as id.
+6.Every filed is bydefault not null   
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Apply to all :
+
+python manage.py migrate
+
+
+1.Perform database configurations inside settings.py 
+2.Write model class inside models.py 
+3.python manage.py migrate
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+

@@ -1,0 +1,118 @@
+1.Create a project
+    >> django-admin startproject DjProject
+
+2.Create an application
+    cd FirstProject
+    >> python manage.py startapp Jobsapp
+
+3.Add that application inside settings.py
+    >>  INSTALLED_APPS = [
+                "django.contrib.admin",
+                "django.contrib.auth",
+                "django.contrib.contenttypes",
+                "django.contrib.sessions",
+                "django.contrib.messages",
+                "django.contrib.staticfiles",
+                "testapp"
+            ]
+
+views.py
+4.Define view function inside view.py 
+>> request is must be passed in the function if not passed here then server giver error
+>> We can add multiple view functions as we need
+
+    >>  def greeting(request):
+            <h1>Welcome to DURGA django classes purely nursey level classes</h1>
+            return HttpResponse(s)
+
+>> Inside view function we can call the multiple function it is possible
+
+
+
+
+urls.py
+5.Define urlpatterns for view inside urls.py file 
+    >> This url for the end users 
+
+        from django.url import path
+        from testapp import view
+        urlpatterns[
+            ....
+            path("hello/", views.display)
+        ]
+
+6.runserver
+    >> python manage.py runserver
+
+7.send request
+    >> http://127.0.0.1:8000/hello        
+
+    >> Django we not require the to restart the server django automatically restart it
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+100 view function
+100 urls 
+how the end user can remember this much urls 
+We have design the home page and in this page thre are different buttons 
+we give the functionality to redirect to this url on click on the button
+
+>> End user required only the home page url
+
+Develop an web application to send the message based on the time?
+    Hello Friend, Good Mornging
+    Hello Friend, Good Afternoon
+    Hello Friend, Good Evening
+    Hello Friend, Good Night
+ 
+     
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+django-admin startproject dtroject
+
+python manage.py startapp testapp 
+
+views output 
+
+<h1>Hello Friend, Good evening </h1><hr><h1>Now the server date and time is: 2024-04-21 19:47:13.643188</h1>
+
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+app-1: to display just welcome message
+app-2: To display server time as response 
+app-3: Multiple views in same application  
+app-4: Customized responce based on the time.
+app-5: One project but mutliple applications 
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+django-admin startproject OneProjectMultipleapps
+
+python manage.py startapp firstapp 
+python manage.py startapp secondapp 
+
+
+Error::::
+AttributeError: module 'secondapp.views' has no attribute 'test_view1'. Did you mean: 'test_view2'?
+
+>> Beacuse the you import the views from the firstapp and secondapp application
+the secondapp views override the firstapp views 
+
+To handle this use situation or conflict
+    from firstapp import views as v1
+    from secondapp import views as v2
+
+runserver
+    >> python manage.py runserver
+send request
+    >> http://127.0.0.1:8000/test1    
+    >> http://127.0.0.1:8000/test2    

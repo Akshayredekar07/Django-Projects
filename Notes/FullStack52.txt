@@ -1,0 +1,223 @@
+
+Django  Templates:::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::
+
+View :: For the business logic
+
+Templates::  For the presentation/logic 
+
+MVC:: model view controller 
+M ----> model(business logic)
+V ----> View(presentation logic)
+C ----> Controller(coordination)
+
+
+MVT:: model view Templates
+M ----> model
+V ----> View(business logic-->python file)
+C ----> Controller(presentation logic--->html file)
+
+
+It is not recommend to write the html code inside python file(view.py) becasue
+ 
+1. It reduces redability, becasue python code mixed with the html code
+2. No seperation of roles. python devlopers hsas to take care about python and html code 
+3. It does not promote the reusability of the code
+
+We can overcome these problems by seperating the html code into the html file
+This html file is nothing but template.
+From views.py we can use these template file based on our requiredment
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+python Stuff required to devlop template based application 
+django 3.x version
+
+print(__file__)  >> It return the name of file
+
+pathlib #this module for get complete path 
+
+pathlib ----> module name
+Path ----->class name 
+
+pathlib module provides classes representing file system paths based on different operating systems. this python's inbuilt module
+
+pathlib module provides various classes representing ubderlying operating system pscific paths
+
+from pathlib import Path 
+print(__file__) # It returns the name of the file 
+fpath = Path(__file__)
+print(type(fpath)) #<class 'pathlib.WindowsPath'>
+complete_path=fpath.resolve()
+print(complete_path)
+
+# use short 
+print(Path(__file__).resolve()) 
+#C:\Users\Akshay\Documents\ALL Folders\DSJ\Multipleapps\firstapp\tests.py
+print(Path(__file__).resolve().parent)
+# C:\Users\Akshay\Documents\ALL Folders\DSJ\Multipleapps\firstapp
+print(Path(__file__).resolve().parent.parent)
+#C:\Users\Akshay\Documents\ALL Folders\DSJ\Multipleapps
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Steps to devlop template based application
+
+1.Create a project
+    >> django-admin startproject templateproject
+
+2.Create an application
+    cd FirstProject
+    >> python manage.py startapp testapp
+
+3.Add that application inside settings.py
+    >>  INSTALLED_APPS = [
+                "django.contrib.admin",
+                "django.contrib.auth",
+                "django.contrib.contenttypes",
+                "django.contrib.sessions",
+                "django.contrib.messages",
+                "django.contrib.staticfiles",
+                "testapp"
+            ]
+
+
+
+4. Create a 'template' Folder our main porject folder
+::This is project level  
+
+
+
+
+5.Add templates folder location to settings.py so that django can aware of our templates
+"DIRS": []
+    >> Add the path of template foder in  this 
+
+"DIRS": ['C:\Users\Akshay\Documents\ALL Folders\DSJ\templateproject\templates']
+
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": ['C:\Users\Akshay\Documents\ALL Folders\DSJ\templateproject\templates'],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
+
+
+>>>This approch is not good
+    Hard coding system specific location not suitable
+>>To overcome this problem  we can generate yhe template folder path programatically   
+
+
+
+C:.
+│   manage.py
+│   
+├───templateproject
+│   │   asgi.py
+│   │   settings.py
+│   │   urls.py
+│   │   wsgi.py
+│   │   __init__.py
+│   │
+│   └───__pycache__
+│           settings.cpython-311.pyc
+│           __init__.cpython-311.pyc
+│
+├───templates
+│   └───testapp
+└───testapp
+    │   admin.py
+    │   apps.py
+    │   models.py
+    │   tests.py
+    │   views.py
+    │   __init__.py
+    │
+    └───migrations
+            __init__.py 
+
+
+# if i used in pogram in settings.py then 
+from pathlib import Path 
+
+print(Path(__file__))  #settings.py
+print(Path(__file__).resolve())  
+#; It give the complete path
+#C:\Users\Akshay\Documents\ALL Folders\DSJ\templateproject\templateproject\settings.py
+
+Path(__file__).resolve().parent.parent 
+#C:\Users\Akshay\Documents\ALL Folders\DSJ\templateproject\
+
+Path(__file__).resolve().parent.parent/'templates' ==>generate the templates folder location
+
+
+settings.py 
+from pathlib import Path
+:::::::::;new version 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = BASE_DIR/'templates'
+
+old version:::::::; not recommended
+import os 
+#Build path 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
+
+add this in templates:::
+"DIRS": [TEMPLATE_DIR]  with "DIRS": []
+
+
+
+6. Create html file inside: C:\Users\Akshay\Documents\ALL Folders\DSJ\templateproject\templates\testapp\wish.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates for the testapp</title>
+</head>
+<body>
+    <h1>Welcome to the 2nd hero of the Django Cinema: Templates</h1>
+</body>
+</html>
+
+
+7.Define view function inside view.py 
+
+# Create your views here.
+def wish_view(request):
+    return render(request, 'testapp/wish.html')
+
+
+
+8.Define urlpatterns t application level inside urls.py
+from testapp import views
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("hello/", views.wish_view),
+]
+
+
+9.runserver
+    >> python manage.py runserver
+
+10.send request
+    >> http://127.0.0.1:8000/hello        
+
+    >> Django we not require the to restart the server django automatically restart it
+
+ 

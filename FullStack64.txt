@@ -1,0 +1,138 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Project using the sqlite3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject ModelProject2v 
+
+python manage.py startapp testapp
+
+~~~No configurations required for sqlite3 project
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+5. to Create table we have to write model class inside models.py file 
+student table
+    name 
+    marks 
+
+
+from django.db import models
+
+# Create your models here.
+class Student(models.Model):
+    name=models.CharField(max_length=30)
+    marks=models.IntegerField()
+
+~~~check connections
+from django.db import connection 
+c = connection.cursor()
+
+
+Model class ----> middle Query -----> datatable table
+
+python manage.py makemigrations
+
+
+python manage.py sqlmigrate testapp 0001
+   
+PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject2v> python manage.py makemigrations
+>>
+Migrations for 'testapp':
+  testapp\migrations\0001_initial.py
+    - Create model Student
+PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject2v>
+--
+-- Create model Student
+--
+CREATE TABLE "testapp_student" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(30) NOT NULL, "marks" integer NOT NULL);
+COMMIT;
+PS C:\Users\Akshay\Documents\ALL Folders\DSJ\ModelProject2v>
+
+
+```````````````
+
+python manage.py migrate 
+
+Q. What is the advantage of creating table by using migrate command?
+
+In addition to our table, default applications tables also will be created 
+
+`````````````````````````````````````````````````````````
+how to see the database tabled in django 
+
+~~~~~~~~~~~~~`creation of superuser~~~~~~~~~~~~~~~~~~~~~~~~~
+
+python manage.py createsuperuser
+ 
+ Note:: By default our tables are not visible in admin interface 
+
+ we have to register inside admin interface then only it is visible we have to do registration inside admin.py file 
+
+
+admin.py 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+ from django.contrib import admin
+from testapp.models import Student
+
+# Register your models here.
+class StudentAdmin(admin.ModelAdmin):
+    list_display=['name', 'marks']
+
+
+admin.site.register(Student, StudentAdmin)    
+
+note:: for every model class we have to define seperate admin class. In that admin class we have to specify which fields(columns) should required to display in admin interface. here we use list_display predefined variable.
+
+we have to register every model and corresponding ModelAdmin class in admin.site 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+New project 
+
+django-admin startproject ModelProject3
+
+django-admin startapp testapp
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+django-admin startproject ModelPro4
+cd ModelPro4
+django-admin startapp testapp
+
+Make the DATABASE configurations and go to the project directory and open the terminal
+in shell use commands:  
+~python manage.py shell 
+from django.db import connection    
+c=connection.cursor()
+
+WRITE in models.py 
+
+class Students(models.Model):
+    name=models.CharField(max_length=30)
+    marks=models.IntegerField()
+    
+Run the FOLLOWING commands
+
+python manage.py makemigrations
+python manage.py migrate
+    
+
+>>testapp >> admin.py ::    
+from django.contrib import admin
+from testapp.models import Students
+
+# Register your models here.
+class StudentAdmin(admin.ModelAdmin):
+    list_display=['name', 'marks']
+
+admin.site.register(Students, StudentAdmin)    
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+creating the superuser:
+
+python manage.py createsuperuser

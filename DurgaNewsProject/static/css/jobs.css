@@ -1,0 +1,21 @@
+
+.container .jumbotron{
+    margin-top: 150px;
+}
+
+.jumbotron{
+    background-color: grey;
+}
+
+body{
+    background: url("https://www.baltana.com/imagecache/thumbnails/54270/290x180.png");
+}
+
+/* jobs.css */
+body {
+    background: url("https://m.media-amazon.com/images/M/MV5BODIwZThlZTktNjg0MS00MDY2LTgyYWItYTA1MWE2OWNiODUxXkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}

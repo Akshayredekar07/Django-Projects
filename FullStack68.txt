@@ -1,0 +1,139 @@
+
+django-seed Project:
+
+django-admin startproject modelP8
+
+python manage.py startapp testapp
+
+add testapp, django_seed in the settings.py
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Models.py
+from django.db import models
+
+# Create your models here.
+class Student(models.Model):
+    rollno = models.IntegerField()
+    name = models.CharField(max_length=30)
+    dob = models.DateField()
+    marks = models.IntegerField()
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=30)
+    address = models.TextField()
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+python manage.py makemigrations
+Migrations for 'testapp':
+  testapp\migrations\0001_initial.py
+    - Create model Student
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+python manage.py migrate
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+admin.py
+from django.contrib import admin
+from testapp.models import Student
+
+# Register your models here.
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ['rollno', 'name', 'dob', 'marks', 'email', 'phone_number', 'address']
+
+admin.site.register(Student, StudentAdmin)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+python manage.py createsuperuser
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+python manage.py runserver
+
+http://127.0.0.1:8000/admin
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+we have to generate the fake data to test your application manually, but we dont requires this due to the django_seed :
+
+python manage.py seed testapp --number=10
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mysql> select * from testapp_student;
+
+| id | rollno | name                          | dob        | marks  | email                      | phone_number          | address                                                 |
++----+--------+-------------------------------+------------+--------+----------------------------+-----------------------+---------------------------------------------------------+
+|  1 | -17330 | Past country matter.          | 1974-08-01 |  20069 | fobrien@example.com        | 001-369-335-0762      | 20468 Mcdonald Path
+Breannaland, RI 36013               |
+|  2 |  22929 | Wonder force national light.  | 2018-04-23 |  31439 | bendermegan@example.com    | (841)893-0699x70292   | 22092 Heather Glens Apt. 017
+Cooktown, CT 17486         |
+|  3 |  25297 | Rise system attack huge time. | 1977-09-25 |  13892 | dorothyvazquez@example.org | (215)810-5821x1957    | 4408 Hart Village Apt. 741
+Jessicaborough, UT 56585     |
+|  4 | -31634 | Read there oil charge power.  | 2023-11-21 |  17935 | smithrichard@example.com   | 001-437-363-6601x005  | 1210 Rachel Manor Suite 593
+Port Savannahfurt, IN 00937 |
+|  5 | -30148 | Mouth others write level.     | 2023-01-17 | -20837 | gbrown@example.org         | (882)526-5966         | 8481 Victoria Cliffs
+Markstad, MS 54980                 |
+|  6 | -20752 | Red imagine shake oil.        | 1973-04-14 |  26022 | andrea48@example.org       | +1-905-616-6222       | 884 Donald Road
+South Kathymouth, AK 98083              |
+|  7 |  -1814 | Can such past any food.       | 2009-04-29 |  30590 | amanda63@example.org       | (800)491-9238x67469   | 4769 Billy Lakes
+Karaville, TX 23455                    |
+|  8 |   4903 | Serious side course poor.     | 1978-10-05 | -30527 | oscar96@example.org        | 204.659.3666x342      | 77715 Christina Parkways
+Haroldmouth, MI 79423          |
+|  9 |  17213 | Garden expect hotel.          | 1991-04-01 |   9869 | parkerbrittany@example.net | 001-435-697-8722x7134 | 2048 Sandra Gateway Apt. 625
+Burnschester, IA 48640     |
+| 10 |   2098 | Mr trip throw move.           | 2015-10-18 |  26135 | jmorgan@example.com        | 7477384408            | 90222 Madison Radial Apt. 561
+Wilsonton, WY 13741       |
+
+10 rows in set (0.00 sec)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Durgajobs porject including database stuff:
+
+views
+templates files
+static files 
+database 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+django-admin startproject DurgaJobs
+
+python manage.py startapp testapp
+
+from django.db import models
+
+# Create your models here.
+class Hydrabad_jobs(models.Model):
+    date=models.DateField()
+    company=models.CharField(max_length=100)
+    title=models.CharField(max_length=100)
+    eligibilty=models.CharField(max_length=100)
+    address=models.CharField(max_length=100)
+    email=models.EmailField()
+    phone_number=models.BigIntegerField()
+
+
+class Bengluru_jobs(models.Model):
+    date=models.DateField()
+    company=models.CharField(max_length=100)
+    title=models.CharField(max_length=100)
+    eligibilty=models.CharField(max_length=100)
+    address=models.CharField(max_length=100)
+    email=models.EmailField()
+    phone_number=models.BigIntegerField()
+
+
+class Pune_jobs(models.Model):
+    date=models.DateField()
+    company=models.CharField(max_length=100)
+    title=models.CharField(max_length=100)
+    eligibilty=models.CharField(max_length=100)
+    address=models.CharField(max_length=100)
+    email=models.EmailField()
+    phone_number=models.BigIntegerField()
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+python manage.py runserver
+
+http://127.0.0.1:8000/admin

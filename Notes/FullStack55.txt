@@ -1,0 +1,17 @@
+
+
+django-admin startproject templateProject4
+
+cd templateProject4
+
+python manage.py startapp cherry 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~
+startproject 
+startapp 
+add app in settings.py 
+Create the template inside the main project folder named with template
+write a view function 
+
+to send the dynamic content fro views.py to templates file template tags/variables

@@ -1,0 +1,193 @@
+Django was created in 2003 as an internal project at lowerence Journal-world news paper for their web development 
+
+Django is free and open source framework 
+Maintained by DSF(Django software foundation) 
+
+
+Adrian Holovaty and simmon willison >> guitarist
+
+2005 | For general public | 21 july 2005
+
+Django >> Django ReinHardt
+
+Official Website: djnagoproject.com 
+Tagline : The web framework for the perfectionist with deadlines 
+
+Follows: MVT architecture 
+
+Top 5 Features of Django Frameworks:  
+    1. Fast 
+        development os very easy 
+        95% of the work can be done by django 
+        5% devloper is responsible 
+
+    2. more concuise
+        Less lines of codes     
+
+    3. Fully Loaded 
+        Django has a dozens of extras 
+        user authetication,content administration, RSS feed..
+
+    4.  Security
+        SQL Injection Accack >> Django take case of this 
+        
+        select * from user where name="xxx" and pwd='yyy';
+        name=durga
+        pwd=anuska
+
+        name=durga'--
+        pwd=sunny 
+        select * from user where name="durga"--" and pwd='sunny';
+
+        --  comment in sql 
+
+        cross site scripting 
+        cross site request forgery 
+
+    5. Scalability 
+        100 request -day1
+        500 request -day2
+        500000000 request -day3 
+        handle the multiple 
+
+   6. Versatile 
+        youtube 
+        nasa 
+        university website 
+        in any areas 
+
+
+Django simplifies the devlopers life
+Clear documentation 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+By using the python programming we are able to prepare the following two types of applications 
+1. Standalone Applications
+2. Enterprise Applications / Distributed Applications 
+
+ Standalone applications
+    If we design and execute any application without uisng client-server architecture or without Distributing application logic over multiple machine or by providing the complete application logic in single machine then that application is called as 'stabdalone' application
+    Ex. Calculator
+    
+    Standalone application
+        a. CUI applications
+        b. GUI applications
+
+Enterprise Applications / Distributed Applications 
+
+    If we design and execute any application on the basis of the client server architecture or by Distributing application logic on the multiple machine then application is called as 'Enterprise application / distributed application'
+
+
+Enterprise applications 
+    a. web application >>>>>>>> Django, Flask
+    b. distributed application 
+
+Distributed applications 
+    a. Web based distributed application 
+    b. Remote base distributed application 
+
+
+
+REST API --> for the distributed application only 
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~48~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Django project vs Django applications 
+
+project = application + configuration 
+
+How to create a django project 
+    >> django-admin startproject FirstProject 
+        cd FirstProject
+
+    FirstProject
+    |- manage.py (to run server, to create application)
+    |- FirstProject
+        |- settings.py
+        |- urls.py
+        |- wsgi.py
+        |- asgi.py
+        |- __init__.py 
+
+
+Roles of Webservers 
+    >> Webserver is responsible to provide the envirnment to run our web applications.
+
+    >> Web server is responsible to receive the request and forward that request to the corresponding web components(view) based on the urlpatterns and provide required response to the end user 
+
+
+Django itself provide the server 
+    manage.py 
+        |- This script responsible for the run server
+
+        python manage.py runserver 
+        (default port number 8000)
+        http://127.0.0.1:8000/
+
+
+        python manage.py runserver 7777
+        http://127.0.0.1:7777/
+
+        In case of conflicts port number will be changed 
+
+How  to create application 
+    cd FirstProject 
+    python manage.py startapp testapp
+C:    
+│   db.sqlite3
+│   manage.py
+│
+├───FirstProject
+│   │   asgi.py
+│   │   settings.py
+│   │   urls.py
+│   │   wsgi.py
+│   │   __init__.py
+│   │
+│   └───__pycache__
+│           settings.cpython-311.pyc
+│           urls.cpython-311.pyc
+│           wsgi.cpython-311.pyc
+│           __init__.cpython-311.pyc
+│
+└───testapp
+    │   admin.py
+    │   apps.py
+    │   models.py
+    │   tests.py
+    │   views.py
+    │   __init__.py
+    │
+    └───migrations
+            __init__.py
+
+
+1 __init__.py 
+    >> Cosider folder as a python package 
+
+2. admin.py 
+    >> To customize admin page 
+
+3. apps.py 
+    >> In this file we have to specifiy application's specific configuration
+
+4. models.py 
+    >> Applications specific model we have define here 
+      
+5. tests.py 
+    >> To define the test our app functionality 
+
+6. view.py 
+    We have to define the views functions to provide required response to the end user  
+
+ migrations:
+ This folder holdsthe database releted information 
+  
+  

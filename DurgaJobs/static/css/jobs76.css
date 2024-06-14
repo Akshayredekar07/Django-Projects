@@ -1,0 +1,16 @@
+
+.container{
+    margin-top: 200px;
+    text-align: center;
+}
+
+.container .jumbotron{
+    background-color: red;
+    color: white;
+}
+
+.jumbotron a{
+    background: yellow;
+    color: red;
+    border: 2px solid red;
+}

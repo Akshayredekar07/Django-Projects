@@ -1,0 +1,30 @@
+
+Read data from the database adn display to the end users:
+
+1. startporject
+2. startapp
+3. add app in settings.py
+4. add database configurations in settings.py 
+5. test database connection 
+6. create models
+7. makemigrations and migrate
+8. register model and modeladmin inside admin.py 
+9. create superuser 
+10.Logging to admin interfaces and check table is created or not 
+11.templatesfiles and staticfiles and corresponding configurations 
+12.view function to communicate with the database and to get the data 
+    send this data to templatesfiles which is responsible to the end user
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject ModelPro5
+cd .\ModelPro5\
+django-admin startapp testapp 
+
+
+To display the all data to the users:
+
+from testapp.model import Employee
+
+
