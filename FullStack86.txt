@@ -1,0 +1,9 @@
+
+
+Online Exam portal:
+**********************************************************************************************************************************
+
+django-admin startproject OnlineExam 
+
+python manage.py startapp testapp
+

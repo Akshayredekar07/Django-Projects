@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <link rel="stylesheet" href="{% static 'css/first.css' %}">
+</head>
+<body>
+    <div class="exam-container">
+        <h1 class="question">What is the capital of France?</h1>
+        <form id="exam-form">
+            <div class="options">
+                <label>
+                    <input type="radio" name="option" value="a">
+                    A. Berlin
+                </label>
+                <label>
+                    <input type="radio" name="option" value="b">
+                    B. Madrid
+                </label>
+                <label>
+                    <input type="radio" name="option" value="c">
+                    C. Paris
+                </label>
+                <label>
+                    <input type="radio" name="option" value="d">
+                    D. Rome
+                </label>
+            </div>
+            <button type="button" class="next-button" onclick="nextQuestion()">Next</button>
+        </form>
+    </div>
+    <script src="{% static 'javascript/script.js' %}"></script>
+</body>
+</html>
+
+<!-- div  -->
