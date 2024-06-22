@@ -1,0 +1,18 @@
+
+client is first sending the first request:
+
+what information required for the future purpose, server will decide, with that information, server will create cookies and it should be handover to the client.
+
+server will add cookies to the response then automatically cookies will be reached to the client.
+
+response.set_cookie(cookiename, cookievalue)
+
+request.COOKIES.get('count')
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+cookies -->per server per browser
+
+new SessionProject2
+
+ 

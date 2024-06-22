@@ -82,3 +82,50 @@ clean_rpassword():
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+how to check original password reentered pwd are same or not:
+ 
+
+ class FeedbackForm(forms.Form):
+    name = forms.CharField()
+    rollno = forms.IntegerField()
+    email = forms.EmailField()
+    password=forms.CharField(widget=forms.PasswordInput, label='Enter Passowrd' ,)
+    rpassword=forms.CharField(label='Passowrd(Again)' ,widget=forms.PasswordInput)
+    feedback = forms.CharField(widget=forms.Textarea)
+
+
+
+    def clean(self):
+        total_cleaned_data = super().clean()
+
+        pwd = total_cleaned_data['password']
+        rpwd = total_cleaned_data['password']
+        if pwd != rpwd:
+            raise forms.ValidationError("both password must be same")
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Our forms should not accept bot: beacuse some times it may contains the malware
+
+ ~~~
+ Capcha implementation
+ ~~~
+
+  How to prevent the request from the BOT?
+
+  Automated program scrpit is nothing but : BOT
+
+  PROBLEM WITH THE BOT REQUEST:
+   
+   1. To create unneceessary heavy trafiic to the website 
+   2. To spread the malware(viruses)
+
+How to implement
+   ~~~~~~~~~~~~~~~~~~~~~
+In the from, we will pace one hidden filed which is not visible to the end user.
+
+Hence there is no chance of providding value to the hidden filed
+
+but BOT will send the value for that hidden field also, if hidden filed got some value means it is the request from the bot and prevent that form submission 
+
+value='formbot'

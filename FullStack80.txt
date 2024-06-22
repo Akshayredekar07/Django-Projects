@@ -1,0 +1,64 @@
+
+
+Working with the advanced template features:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Template inheritance
+2. Template Filters
+
+
+Template inheritance::
+    If mutiple template files have some common code, it is not recommended to write that common code in every template file.
+    It increases length of the code and reduces the redability and it increases the devlopment time 
+
+    we have to seperate that common code into a new file, which also known as base template. temaining template files should required to extend base template to that common code will inheritend automatically
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject AdvtPro2
+
+python manage.py startapp testapp
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+base.html:
+---------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block title_block %
+        <title>Document</title>
+    {% endblock%}
+
+</head>
+<body>
+    {% block body_block %}
+        //Anything outside of this block is avilabe to child template.
+    This block should be filled by child template to write its own specific code
+    {% endblock %}
+</body>
+</html>
+
+child.html
+----------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Note:
+1. In the prent template, we can define any number of blocks. But child template is responsible to implemnt these blocks
+
+2. It it not mandatory to implement every parent block in child . based on the requirement, child template can decide which block are required to implement
+
+3. while implementing the blocks in the child template, it is not required to follow order.
+
+4. child template can extend any number of parent template.i.e is allowed multiple inheritance
+
+Advantages of template inheritance:
+
+a. Whatever code is avialve in the base template is bydefault avialve to child templates and we are not required to write again. hence promotes code redability
+b. It povide unique and same look and feel for the total web application 
+
+~~~~~~~~~~~~~~~~~~~~~~~~

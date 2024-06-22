@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/first.css' %}">
+</head>
+<body>
+    
+
+
+    {% for record in records %}
+    <h1>{{record.name}} Information</h1>
+    <ul>
+        <li>{{record.name | add:" pvt.ltd" }}</li>
+        <li>{{record.subject | lower}}</li>
+        <li>{{record.dept | title }}</li>
+        <li>{{record.date | timesince }}</li> 
+    </ul>
+
+    {% endfor %}
+</body>
+</html>

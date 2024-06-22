@@ -1,0 +1,49 @@
+
+Session management:
+~~~~~~~~~~~~~~~~~~~
+
+The client and server communicate with the sme common language which is nothing but http
+
+The basic limitation of http is it is stateless protocol. i.e it is unable to remember to 
+the client information for the future purpose across multiple requests. Every request to 
+the server is treated as the new only 
+
+
+To remeber client information at server side, some special machanism must be required wich is nothing but Session management mechanism
+
+Following are the some Session management mechanism:
+
+1. Cookies
+2. Session API 
+3. URL Rewriting 
+4. hidden form fields
+
+Session management using Cookies:
+---------------------------------
+
+RMP Docteor example:
+
+Cookies is a very small amount of information created bt server and maintained by client.
+
+to add Cookie to the response:
+
+    >> response.set_cookie(cname, cvalue)
+
+to get cookies send bt the client in server(views.py):
+
+    >> request.COOKIES[cname]
+    >> request.COOKIES.get(cname)
+    >> request.COOKIES.get(cname, defaultvalue)
+
+pagecount Application:
+
+django-admin startproject pageCount
+
+~~~~~~~~~~~~~~~`
+session management required tables which is present in bydefault:
+
+python manage.py makemigrations 
+python manage.py migrate
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

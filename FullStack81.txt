@@ -1,0 +1,23 @@
+Template filters:
+~~~~~~~~~~~~~~~~~~~~~~~~
+In the template file, the injected data can be displayed by using the template tags {{name}} {{emp.no}}
+
+Before displaying to the end user, if we want to perform some modifications to the injected text, like add something or ut something, case conversion etc and then we should go for filters.
+
+{{Value | filename}}
+{{value | filename: "argument"}}
+
+name: Durga software solution
+
+Same data display in differnt format:
+    |
+
+    {{name}}
+    {{name | upper}}
+    {{name | lower}}
+    {{ name | title}}
+    {{ name | truncate}}
+
+
+Argument to filter are optional:
+

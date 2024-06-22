@@ -1,0 +1,32 @@
+
+
+filters:
+
+    {% for record in records %}
+    <h1>{{record.name}} Information</h1>
+    <ul>
+        <li>{{record.name | upper }}</li>
+        <li>{{record.subject | lower}}</li>
+        <li>{{record.dept | title }}</li>
+        <li>{{record.date | date:"d-m-Y"}}</li>
+    </ul>
+
+    {% endfor %}
+
+
+    <li>{{record.date | timesince }}</li> 
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    How to create our own filters if predfined filters sre not fulfill our requirements
+
+    1 Step:
+
+    create a seperate folder 'templatetags' inside our appilcation level
+
+    2.  create __init__.py iside this folder 
+
+    3. create a python file inside this folder to define our own filter  cust_filter.py 
+
+
+

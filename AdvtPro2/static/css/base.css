@@ -1,0 +1,12 @@
+
+body{
+    background: url('img.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    color: azure;
+}
+
+.navbar{
+    background-image: linear-gradient(rgba(var(--bd-violet-rgb), 1), rgba(var(--bd-violet-rgb), 0.95));
+}

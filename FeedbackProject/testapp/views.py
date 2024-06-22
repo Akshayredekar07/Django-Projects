@@ -24,3 +24,5 @@ def feedback_view(request):
 
     return render(request, 'testapp/feedbackform.html', {'form':form, 'submitted':submitted, "name":name})
 
+ 
+ 

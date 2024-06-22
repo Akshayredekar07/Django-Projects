@@ -1,0 +1,116 @@
+
+
+
+django form validation:
+    1. By using the filed level clan mwthod 
+        clean_fieldname()
+
+    2. By using single clean method
+    3.Django inbuit validators
+    4.Customized validators
+    5. How to prevent BOT request
+
+    How to implement Capcha:
+    ~~~~~~~~~~~~~~~~~~~~~~
+
+
+***********************************************************************
+1.How to get the fake experience?
+2.what kind of questions we can except with fresher/ 2 to 3 years of experience?
+3.How to get real time project for the resume?
+4. Sample resume for the experienced/freshers?
+5.How to get a job?
+6. How to survived in IT industries.
+
+
+If you start giving....then things will start coming..
+
+*************************************************************
+
+Working with the django model forms:
+
+read each field value 
+
+name=form.clean_data['name']
+marks=form.clean_data['marks']
+Student.get_or_create(name=,marks=)
+
+
+10 fileds are there 100 fields:
+
+only one line for model based form:
+**********************************************
+only one line 
+form.save()
+
+
+ Sometimes w can create forms based on model, such type of forms are called Model based forms.
+
+ ~The main advantage of model based forms is wee can grab end user input data and we can save this data easily in database.
+
+
+    form.save()
+    form.save(commit=True)
+
+    Django provides inbuilt spuuort to devlop the model based forms easily 
+
+    How to devlop model based form 
+
+    ******************************
+
+   1.  while devloping form calss we have to inherit form forms.ModelForm calss instead of forms.Form class
+
+    class RegisterForm(forms.Form) --> Normal form 
+    class RegisterForm(forms.ModelForm)-->model form 
+
+
+    2. 
+
+    class RegisterForm(forms.ModelForm):
+         class Meta:
+         model=Student 
+         fields='__all__'
+
+
+    case-1:  insteadof all if we require particular fields
+
+    class RegisterForm(forms.ModelForm):
+         class Meta: 
+         model=Student 
+         fields=('field1, field2, field3)
+
+
+    case-2: Insted of all fields, if we want to exclue certain field
+
+    
+    class RegisterForm(forms.ModelForm):
+         class Meta:
+         model=Student 
+         exclude=['field1', 'field2']
+
+
+How to save the users input data to the daatabase in model based forms 
+
+
+def student_views(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+        form.save()
+
+
+froms.py~
+
+class RegisterForm(forms.ModelForm):
+    field delcleration for validation 
+    class Meta:
+        model=Student
+        fields='__all__'
+
+
+**********************************************************************************************************************************
+
+django-admin startproject ModelFormProject
+
+python manage.py startapp testapp 
+
