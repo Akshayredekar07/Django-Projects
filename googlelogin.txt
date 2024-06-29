@@ -1,0 +1,69 @@
+
+
+project: googlelogin
+app : users
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pip install django-allauth
+
+pip install PyJWT
+
+
+pip install cryptography
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+SITE_ID=1
+
+
+# Application definition
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "users",
+    "djang.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+
+
+    ~~~~~~~~~~~~~~~~~~~
+
+SOCIAL ACCOUNTS
+SOCIALACCOUNT_PROVIDERS = {
+    "google":{
+        "SCOPE":[
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS" : {"access_type": "online"}
+    }
+}
+
+
+~~~~~~~~~~~~~~~~~~~~~~`
+
+AUTHENTICATION_BACKENDS = {
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.accounts.auth_backends.AuthenticationBackend",
+}
+
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+urls.py
+~~~~~~~~~
+
+
+~~~~~~~~~~~~add this line in middleweae
+'allauth.account.middleware.AccountMiddleware',

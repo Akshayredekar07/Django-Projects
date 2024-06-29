@@ -1,0 +1,19 @@
+{% extends 'testapp/base.html' %}
+
+{% block body_block %}
+<br><br>
+<div class="container" align="center">
+    <div class="card" style="width: 30rem; margin-top: 50px;">
+        <div class="card-body">
+            <h5 class="card-title">Please Login to continue Exams</h5>
+            <form method="post" action="{% url 'login' %}">  <!-- Corrected action URL -->
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

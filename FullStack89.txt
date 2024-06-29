@@ -1,0 +1,10 @@
+
+Session7
+
+How to delete item from session:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+del request.session[key]
+
+d[key]=value
+

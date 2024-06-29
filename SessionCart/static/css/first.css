@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.exam-container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.options {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.next-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,183 @@
+
+User authentication and authorization:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Authentication: The process of validating User
+
+Authorization: The process of validating access permission of a User
+
+
+Login page
+User name and password ---> should be stored for the future purpose 
+validation must be require
+
+auth application
+    1. django.contrib.auth 
+    2. django.contrib.contenttypes 
+
+Demo application for authentication:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+"C:\Users\Akshay\Documents\ALL Folders\DSJ"
+
+>>>>>>>>>>>>>>>>>>>>>>>problem 1
+Page not found (404)
+Request Method:	GET
+Request URL:	http://127.0.0.1:8000/accounts/login/?next=/java/
+Using the URLconf defined in authproject.urls, Django tried these URL patterns, in this order:
+
+admin/
+java/
+python/
+aptitude/
+The current path, accounts/login/, didn’t match any of these.
+
+You’re seeing this error because you have DEBUG = True in your Django settings file. Change that to False, and Django will displ
+
+~~~~~~~~~~~~~
+>>>>>>>>>>>>>>>>>>>>>> problem 2
+TemplateDoesNotExist at /accounts/login/
+registration/login.html
+Request Method:	GET
+Request URL:	http://127.0.0.1:8000/accounts/login/?next=/java/
+Django Version:	4.2.7
+Exception Type:	TemplateDoesNotExist
+Exception Value:	
+registration/login.html
+Exception Location:	C:\Users\Akshay\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\loader.py, line 47, in select_template
+Raised during:	django.contrib.auth.views.LoginView
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+# Create your views here.
+def home_view(request):
+    return render(request, 'testapp/home.html')
+
+@login_required
+def java_view(request):
+    return render(request, 'testapp/javaexam.html')
+
+def python_view(request):
+    return render(request, 'testapp/pythonexam.html')
+
+def aptitude_view(request):
+    return render(request, 'testapp/aptitude.html')
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+templates >> registration
+                >> login.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% extends 'testapp/base.html' %}
+
+{% block body_block %}
+<br><br>
+<div class="container" align="center">
+    <div class="card" style="width: 30rem; margin-top: 50px;">
+        <div class="card-body">
+            <h5 class="card-title">Please Login to continue Exams</h5>
+            <form action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+base.html
+~~~~~~~~~~~<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Exam Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Durga Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/java">Java Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aptitude">Aptitude Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/python">Python Exams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        {% block body_block %}
+        {% endblock %}
+    </div>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+urls.py
+~~~~~~~~~~~~~~~
+
+"""
+URL configuration for authproject project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from testapp import views
+
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path('', views.home_view),
+    path('java/', views.java_view),
+    path('python/', views.python_view),
+    path('aptitude/', views.aptitude_view),
+    path('accounts/', include('django.contrib.auth.urls')),
+]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

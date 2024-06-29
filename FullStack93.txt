@@ -1,0 +1,82 @@
+
+#Assignments:
+
+how to creta our own login form
+socical logins 
+How we can create the signup form in alternative way
+
+
+Class Based views
+Function Based views
+Django ORMS
+
+CRUD Uperations
+
+C --->create 
+R --->Retrive
+U --->Update 
+D --->delete
+
+CRUD ops on fbvs
+~~~~~~~~~~~~~~~~
+
+
+FBVCrudProject
+
+testapp
+
+
+insert operation
+~~~~~~~~~~~~~~~~~~~
+compulsary require to provide model form
+capture data from enduser and save data into the database
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Employee model class 
+2. makemir=graitons an migrate 
+3. register model in admin interface 
+4. pupulate.py script with faker module to generate fata data and insert inot database 
+
+5. view function to retive data and insert data 
+
+6. To inser data; 
+
+    form to enter the data 
+    modelform 
+
+7. Delete record
+~~~~~~~~~~~~~~~~~~~~~
+
+ <a href="#/delete/{{emp.id}}">Delete</a>
+
+delete/l2
+
+    path("delete/<int:id>", views.delete_view),
+
+
+def delete_view(request, id):
+    employee = Employee.objects.get(id=id)
+    employee.delete()
+    return redirect("/")
+
+
+update operation~~~~~~
+
+<a href="/update/{{emp.id}}" class="btn btn-warning">Update</a>
+
+ulrs.py
+    path("update/<int:id>", views.delete_view),
+
+step -3:
+
+    
+def update_view(request, id):
+    employee = Employee.objects.get(id=id)
+    form = EmployeeForm(instance=employee)
+
+    return render(request, 'testapp/update.html', {'form': form})
+
+
+
+

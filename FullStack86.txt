@@ -7,3 +7,40 @@ django-admin startproject OnlineExam
 
 python manage.py startapp testapp
 
+Temporary vs Permanent cookies:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+max_age then till that age cookies are store and this tyes of cookies called permanet , and it is stored in the browser's cache. Once we claose browser, automatically the the cookies will be expired. Such type of cookies are called Temporary cookies 
+
+we can create temporary cookies as follows:
+    response.get_cookies(name, value)
+
+If we are setting max_age for the cookie, then cookies will be stored in local file system permantly, oncwes the specified max_age expired then only cookies will be expired. ---> permanaent cookie or persistent cookies. We can create permanaent cookies as follows:
+
+
+response.set_cookies(name, max_age=180)
+response.set_cookies(name, value,180)
+
+    the time for max_age in seconds.
+
+max_age:3*30
+3 month
+max_age:3*30*24*60*60
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~how to set infinite cookies in django~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+Session management by usng (shopping cart application)
+
+browsing books: added some books to the cart
+
+browsing shirts: added some shirts to the cart 
+
+browsing pens: added some pens to the cart 
+
+display cart
+
+django-admin startproject SessionCart
+

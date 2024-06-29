@@ -1,0 +1,86 @@
+
+Limitations of cookies:
+***********************
+
+1. By using cookies we can store very less amount of information. The size of cookies is fiexd. hence if we want to store large amount of information then cookies is not best choice
+
+2. Cookies can hold only string information. If we want to store non-string objects we cannot use cookies
+
+3. cookies information is stored on client side and hence there is no security
+
+4. Every time with every request, browser will send all cookies related to that application, which create network traffic problem
+
+5. There is limit on max number of cookies supported by browser
+
+########$$$$$$$$$$%%%%%%%%%%%^^^^^^^^^^&&&&&&&***
+To overcome this limitations, we should go for session framework
+
+Session management by using Session API(Django Session framework):
+
+Session Framwork: Bank locker | Temple chappal stand | Super speciality hospital
+
+
+Super speciality hospital
+
+
+Django support Inbuilt support for Session API:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+INSTALLED_APPS = [
+    "django.contrib.sessions",
+    
+]
+
+MIDDLEWARE = [
+    "django.contrib.sessions.middleware.SessionMiddleware",
+]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Useful methods for session management:
+
+1. To add data to the session:
+    request.session['key'] = value
+
+2. To get data from session 
+    value = request.session['key']
+
+3. request.session.set_expiry(seconds)
+    set expiry time for session 
+    max inactive interval
+
+4. request.session_get_expiry_age()
+    Retruns expiry age in seconds(the number of secnds until this session expire)        
+
+5. request.session_get_expiry_date()
+    return the date on which date session will be expired 
+
+2 min ---120 seconds 
+100 seconds--->101th second ---> again 120 second
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject Session5 
+
+
+
+from django.shortcuts import render
+
+# Create your views here.
+def page_count(request):
+    print(request.COOKIES)
+    count = request.session.get('count', 0)
+    count = count + 1
+    request.session['count']=count
+    request.session.set_expiry(120)
+    print(request.session.get_expiry_age())
+    print(request.session.get_expiry_date())
+    return render(request, 'testapp/pagecount.html', {'count':count})
+
+Observations:
+
+    request.session.set_expiry(120)
+    request.session.set_expiry(0) -- onece the browser close then  it will expires 
+
+    

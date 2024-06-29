@@ -1,0 +1,87 @@
+
+
+Django provides robust support for securely storing passwords using hashing algorithms. Here’s a comprehensive overview of how password hashing works in Django, both automatically through built-in forms and manually if you need custom implementations.
+
+Automatic Password Hashing
+Django's UserCreationForm and AuthenticationForm handle password hashing automatically. These forms are part of Django’s built-in authentication system and ensure passwords are hashed before being saved to the database.
+
+Using UserCreationForm for Sign-Up:
+
+UserCreationForm includes password validation and hashing. When you call form.save(), the password is automatically hashed.
+
+from django.contrib.auth.forms import UserCreationForm
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()  # Automatically hashes the password
+            return redirect('/accounts/login')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+
+Using AuthenticationForm for Login:
+
+AuthenticationForm is used for logging in users and handles password hashing comparison.
+
+In your login view, you typically don’t need to handle password hashing manually:
+
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+the default password hasher : pbkdf_sha256 
+we can use more secure password hashers
+like argon2, bcrypt
+
+pip install bcrypt
+
+pip install django[argon2]
+
+More secure algorithm is argon2 then bcrypt, and then pbkdf_sha256 
+
+
+In settings.py we have to configure the password hasher:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PASSWORD_HASHERS=[
+    'django.contrib.auth.hashers.Argon2PasswordHashers',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHashers',
+    'django.contrib.auth.hashers.BCryptPasswordHashers',
+    'django.contrib.auth.hashers.PBKDF2PasswordHashers',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHashers',
+]
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+order is importtant
+
+first is first aviable if it is not then go to the next 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+algorithm: argon2 variety: argon2id version: 19 memory cost: 102400 time cost: 2 parallelism: 8 salt: qi4WC0**************** hash: jadrVv*************************************

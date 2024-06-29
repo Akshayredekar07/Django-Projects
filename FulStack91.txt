@@ -1,0 +1,61 @@
+
+
+Note: Login url pattern for suth application: /accounts/login 
+
+Request URL: http://127.0.0.1:8000/accounts/login/?next=/java/
+Request URL: http://127.0.0.1:8000/accounts/login/?next=/python/
+Request URL: http://127.0.0.1:8000/accounts/login/?next=/aptitude/
+
+
+If we click login button, after next page is profile page bydefault.
+
+If we want to confiugre our own destination page, we have to write following line in settings.python
+*********************************************
+LOGIN_REDIRECT_URL="/"
+
+implementing login functionlaity:
+
+1. update login link with the url pattern: /accounts/login/
+<a class="nav-link" href="/accounts/login">Login</a>
+
+2. Congfigure destination page inside settings.py 
+LOGIN_REDIRECT_URL="/"
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+implementing the logout functionallity
+
+implementing login functionlaity:
+
+1. update logout link with the url pattern: /accounts/login/
+<a class="nav-link" href="/accounts/logout">Logout</a>
+
+
+Default detination for th3 logout is;>.
+    we can configure own logout destinaio page ;
+
+
+2. Congfigure destination page inside settings.py 
+LOGOUT_REDIRECT_URL="/"
+
+logout destination page:   
+
+defining seperate logout page;
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Implementing signup functionallity
+
+auth application having two class to provide login form 
+
+But auth application does not contains any form class for signup functionallity
+
+If an user signup, compulsory thst information should be stored in database (user table)
+
+
+display form to signup thst information should be stored inside database directly. for such type of requirement is highly recommended to go for Model Based form 
+
+

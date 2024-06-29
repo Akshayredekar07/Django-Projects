@@ -1,0 +1,54 @@
+
+Class Based views:
+~~~~~~~~~~~~~~~~~
+
+FBV's veiws are olr intorduced in django 1.3V 
+CBV's are very very easy to use compared with FBV 
+
+The most commonly used in real time of views CBV
+
+FBV are more poweful with compared to the CBVs 
+If you enable to handle the CBV then use FBV 
+
+CBV menats for common requirements:
+eg;
+
+Read data from employee table
+
+Complex operation over Employee and customers table simultanoulsy us FBV 
+
+KFC:
+
+very small requirements requre very small pices 
+
+Every CBV internally converted into the FBV 
+
+CBV is wrapper over the FBV  to reduce complexity 
+
+ 
+
+ Radymade Shirts;
+    
+    Clothes --> Tailor --> stich based on his customized requirements 
+
+
+Everything we can do by FBV then why we should go for CBV?
+
+>> To simplifiy our life 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-admin startproject CBVProject
+
+Hello world application using the CBV views:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+from django.views.generic import View
+from django.http import HttpResponse
+
+# Create your views here.
+class HelloWorldView(View):
+    def get(self, request):
+        return HttpResponse("<h1>Hello Hitman #45❤️ </h1>")
+
+        
