@@ -1,0 +1,18 @@
+
+python -m venv .venv 
+
+pip install uv
+
+to create virtual envirment;
+
+uv venv
+
+Activate the virtual envirment
+ >> .venv\Scripts\activate
+
+cd ".venv\Scripts"
+
+activate
+
+uv pip install module_name
+

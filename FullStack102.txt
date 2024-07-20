@@ -1,0 +1,128 @@
+Implementing OR Queries in Django ORM:
+
+```
+
+कोड कॉपी करणे
+
+```
+You can implement OR queries in Django ORM in two ways:
+
+Using the | operator to combine querysets:
+
+Example:
+
+emp_list = queryset1 | queryset2
+Using Q objects within the filter() method for complex conditions:
+
+Example:
+
+emp_list = Employee.objects.filter(Q(ename__startswith='D') | Q(ename__endswith='t'))
+Implementing AND Queries in Django ORM:
+
+To implement AND queries in Django ORM, ensuring all conditions are satisfied, you can:
+
+Use the & operator to combine querysets:
+
+Example:
+
+queryset1 & queryset2
+Use Q objects within the filter() method:
+
+Example:
+
+Employee.objects.filter(Q(condition1) & Q(condition2))
+Pass multiple conditions directly to the filter() method:
+
+Example:
+
+Employee.objects.filter(condition1, condition2)
+These methods allow you to construct complex queries in Django ORM using logical OR and AND operations effectively.
+
+
+How to implement NOT queries in Django ORM
+
+all() : To get all records
+filter(condition): To get records where condition is satisfied
+
+We can implement NOT querie in 2 ways:
+
+1. exclude(condition) : To get records where condition is failed
+2. filter(~Q(condition))
+
+Example:
+
+To select all employees where name does not start with "J"
+Employee.objects.filter(~Q(condition))
+Employee.objects.exclude(condition)
+
+
+How to select only requied columns in the query set:
+
+select * from employees;
+select ename, esal from employees;
+
+1. By using values_list():
+  {% for emp in emp_list %}
+    <tr>
+        {% for v in emp %}
+        <td>{{v}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+
+
+2. By using values()
+
+    {% for emp in emp_list %}
+    <tr>
+        {% for k,v in emp.items %}
+        <td>{{v}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+
+3. By using only:
+
+
+Note:
+
+values_list()  : QuerySet Contains tuples
+values()  : QuerySet Contains dict objects
+only()  : QuerySet Contains Employee objects
+
+views.py
+~~~~~~~~
+
+from django.shortcuts import render, redirect
+from testapp.models import Employee
+
+from django.db.models import Q
+
+
+# Create your views here.
+def retrive_view(request):
+    # emp_list = Employee.objects.filter(esal__gt=15000)
+    # emp_list = Employee.objects.filter(ename__contains="John")
+    # emp_list = Employee.objects.filter(ename__icontains="john")
+    # emp_list = Employee.objects.filter(id__in=[1,2,3])
+    # emp_list = Employee.objects.filter(ename__startswith="D")
+    # emp_list = Employee.objects.filter(ename__endswith="t")
+    # emp_list = Employee.objects.filter(esal__range=[17000, 21000])
+    # emp_list = Employee.objects.filter(esal__range=[17000, 21000]) | Employee.objects.filter(ename__contains="D")
+
+    # emp_list = Employee.objects.filter(Q(esal__range=[17000, 21000]) | Q(ename__contains="D"))
+    # emp_list = Employee.objects.filter(Q(esal__range=[17000, 21000]) & Q(ename__contains="D"))
+
+    # emp_list = Employee.objects.filter(ename__contains="d", esal__gt = 15000)
+    # emp_list = Employee.objects.values_list('ename', 'esal', 'eaddr')
+    emp_list = Employee.objects.values('ename', 'esal', 'eaddr')
+    emp_list = Employee.objects.only('ename', 'esal', 'eaddr')
+
+
+    # return render(request, 'testapp/index.html', {'emp_list': emp_list})
+    return render(request, 'testapp/specificcol.html', {'emp_list': emp_list})
+
+
+

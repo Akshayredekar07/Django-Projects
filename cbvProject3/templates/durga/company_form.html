@@ -1,0 +1,17 @@
+{% extends "durga/base.html" %}
+
+{% block content %}
+
+<h1>Company insert/update form</h1><hr>
+<form action="" method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+
+    <input type="submit" class="btn btn-primary" name="" value="Insert/update">
+
+</form>
+
+
+{% endblock content %}
+
+

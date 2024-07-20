@@ -1,0 +1,193 @@
+
+
+Default 
+
+CreateView
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+We can use this data class to insert data 
+
+ImproperlyConfigured at /create/
+Using ModelFormMixin (base class of BookCreateView) without the 'fields' attribute is prohibited
+
+we can solve this problem using fields problem: attributr
+    fields=('title', 'author','pages','price')
+
+
+TemplateDoesNotExist at /create/
+testapp/book_form.html
+Request Method:	GET
+Request URL:	http://127.0.0.1:8000/create/
+Django Version:	4.2.7
+Exception Type:	TemplateDoesNotExist
+
+
+if we fill the form but we get error
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+after inserting which page control has to go we have not specefied this
+
+ImproperlyConfigured at /create/
+No URL to redirect to.  Either provide a url or define a get_absolute_url method on the Model.
+
+
+
+from django.db import models
+from django.urls import reverse
+
+# Create your models here.
+class Book(models.Model):
+    title=models.CharField(max_length=300)
+    author=models.CharField(max_length=30)
+    pages=models.IntegerField()
+    price=models.FloatField()
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk':self.pk})
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# views.py
+from django.views.generic import ListView
+from .models import Book
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'book_list.html'
+    context_object_name = 'books'
+
+# urls.py
+from django.urls import path
+from .views import BookListView
+
+urlpatterns = [
+    path('books/', BookListView.as_view(), name='book-list'),
+]
+
+
+
+
+# views.py
+from django.views.generic import DetailView
+from .models import Book
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'book_detail.html'
+    context_object_name = 'book'
+
+# urls.py
+from django.urls import path
+from .views import BookDetailView
+
+urlpatterns = [
+    path('books/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
+]
+
+
+
+
+
+# views.py
+from django.views.generic import CreateView
+from .models import Book
+from django.urls import reverse_lazy
+
+class BookCreateView(CreateView):
+    model = Book
+    fields = ['title', 'author', 'summary']
+    template_name = 'book_form.html'
+    success_url = reverse_lazy('book-list')
+
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'pk': self.pk})
+
+
+
+
+
+
+<!-- templates/book_form.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Add a new book</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
+
+
+
+
+
+# models.py
+from django.db import models
+from django.urls import reverse
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    summary = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('book-detail', kwargs={'pk': self.pk})
+
+
+
+
+# views.py
+from django.views.generic import UpdateView
+from .models import Book
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = ['title', 'author', 'summary']
+    template_name = 'book_form.html'
+    success_url = reverse_lazy('book-list')
+
+# urls.py
+from django.urls import path
+from .views import BookUpdateView
+
+urlpatterns = [
+    path('books/<int:pk>/edit/', BookUpdateView.as_view(), name='book-update'),
+]
+
+
+
+
+
+# views.py
+from django.views.generic import DeleteView
+from .models import Book
+
+class BookDeleteView(DeleteView):
+    model = Book
+    template_name = 'book_confirm_delete.html'
+    success_url = reverse_lazy('book-list')
+
+# urls.py
+from django.urls import path
+from .views import BookDeleteView
+
+urlpatterns = [
+    path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),
+]
+
+
+
+
+
+<!-- templates/book_confirm_delete.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Delete Book</h1>
+  <p>Are you sure you want to delete "{{ book.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+{% endblock %}

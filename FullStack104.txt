@@ -1,0 +1,36 @@
+Aggregate functions:
+~~~~~~~~~~~~~~~~~~~~
+
+Django ORM defines the severals functions to perform aggregate operations
+
+Avg(), Min(), Max(), Count(), etc.
+
+
+ {'esal__avg': 14900.3}
+    my_dict={'avg':avg['esal__avg'], 'max':max['esal__max'], 'min':min['esal__min'], 'sum':sum['esal__sum'], 'count':count['esal__count']}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+How to perform Create, Update, Delete operations:
+
+Add the single record:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1
+e = Employee(eno=1234, ename="Dheeraj", esal=12345, eaddr="Bengluru")
+e.save()
+
+2. 
+Employee.objects.create(eno=4432, ename="Narendra model", esal=34213, eaddr="Delhi")
+
+Add multiple records:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+use: bulk_create() method 
+
+```
+Employee.objects.bulk_create([
+Employee(eno=2413, ename="Sachin", esal=332211, eaddr="Mumbai"),
+Employee(eno=4545, ename="Rohit", esal=43563, eaddr="Mumbai"),
+Employee(eno=1114, ename="virat", esal=54332, eaddr="Delhi"),
+])
+```

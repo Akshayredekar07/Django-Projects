@@ -1,0 +1,13 @@
+{% extends "durga/base.html" %}
+
+{% block content %}
+
+<h3>List Of all Companies</h3>
+<ul> 
+    {% for company in company_list %}
+        <li><a href="/{{company.id}}">{{company.name}}</a></li>
+    {% endfor %}
+</ul>
+<a href="/create" class="btn btn-success">Insert new Company</a>
+{% endblock content %}
+

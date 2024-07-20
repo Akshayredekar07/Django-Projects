@@ -1,0 +1,15 @@
+
+{% extends "durga/base.html" %}
+
+{% block content %}
+
+<h1>{{company.name}} Information</h1>
+<ul>
+    <h3><li>Company name: {{company.name}}</li></h3>
+    <h3><li>Company location: {{company.location}}</li></h3>
+    <h3><li>Company ceo: {{company.ceo}}</li></h3>
+</ul>   
+<a href="/update/{{company.id}}" class="btn btn-warning">Update Record</a>
+<a href="/delete/{{company.id}}" class="btn btn-danger">Delete Record</a>
+<a href="/" class="btn btn-success">List All Records</a>
+{% endblock content %}

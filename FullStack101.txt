@@ -1,0 +1,32 @@
+ORM: Object Relational Mapping
+
+To select all employees from the employee table:
+
+SQL Query: SELECT * FROM employee
+ORM Equivalent: Employee.objects.all()
+For complex operations, ORM may not support:
+
+Example: Employee.objects.all()
+Note: Every ORM statement translates into an SQL query.
+
+Examples of filtering records based on conditions:
+
+Filter employees with salary greater than 15000:
+
+ORM: Employee.objects.filter(esal__gt=15000)
+Various field lookups:
+
+Exact match: Employee.objects.filter(id__exact=15000)
+Case-insensitive exact match: Employee.objects.filter(ename__iexact="Casey Reeves")
+Contains (case sensitive): Employee.objects.filter(ename__contains="John")
+Contains (case insensitive): Employee.objects.filter(ename__icontains="John")
+In a given iterable: Employee.objects.filter(id__in=[1, 2, 3])
+Greater than: Employee.objects.filter(esal__gt=15000)
+Greater than or equal to: Employee.objects.filter(esal__gte=15000)
+Less than: Employee.objects.filter(esal__lt=15000)
+Less than or equal to: Employee.objects.filter(esal__lte=15000)
+Starts with (case sensitive): Employee.objects.filter(ename__startswith="D")
+Starts with (case insensitive): Employee.objects.filter(ename__istartswith="D")
+Ends with: Employee.objects.filter(ename__endswith="t")
+Range test: Employee.objects.filter(esal__range=(1200, 1600))
+

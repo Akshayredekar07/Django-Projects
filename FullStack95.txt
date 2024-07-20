@@ -51,4 +51,63 @@ class HelloWorldView(View):
     def get(self, request):
         return HttpResponse("<h1>Hello Hitman #45❤️ </h1>")
 
-        
+
+
+``````````````````````````````````````````
+
+Note: 
+    ?? While defining class based views as we have extends View class 
+
+    2. To provide response to GET request, django will always call get() method. hence we have to override this method in our view class. similarly other http methods lke POST(), head(), put(), delete(), etc
+
+    3. While defining url patterns we have to use as_view() method 
+
+    Template based application using class based views~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    from django.contrib import admin
+from django.urls import path
+from testapp import views
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("hello/", views.HelloWorldView.as_view()),
+    path("tt/", views.TemplateCBV.as_view()),
+]
+
+
+~~~~~~~~~~~`
+from django.views.generic import View
+from django.views.generic import TemplateView
+from django.http import HttpResponse
+
+
+# Create your views here.
+class HelloWorldView(View):
+    def get(self, request):
+        return HttpResponse("<h1>Hello Hitman #45❤️ </h1>")
+
+
+class TemplateCBV(TemplateView):
+    template_name='testapp/result.html'
+
+
+`````````````
+>>>>>template_name and TemplateView is predfined names
+
+ result.html   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello this response from template based CBV</h1>
+</body>
+</html>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

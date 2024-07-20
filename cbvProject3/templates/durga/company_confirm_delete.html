@@ -1,0 +1,16 @@
+
+{% extends "durga/base.html" %}
+
+{% block content %}
+
+<h3>Do you want ot really delete this {{company.name}}</h3>
+    <form action="">
+        {% csrf_token %}
+
+        <input type="submit" class="btn btn-danger" value="Delete Record">
+
+        <a href="/{{company.id}}" class="btn btn-success"> Cancel</a>
+
+    </form>
+{% endblock content %}
+ 

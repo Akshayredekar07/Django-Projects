@@ -1,0 +1,16 @@
+ListView
+Purpose: To list out all records.
+Default Template Name: book_list.html
+Default Context Object Name: book_list
+DetailView
+Purpose: To get details of a particular record.
+Default Template Name: book_detail.html
+Default Context Object Name: book or object
+CreateView
+Purpose: To insert/create a new record.
+Default Template Name: book_form.html
+
+
+Delete
+~~~~~~~~~
+django.template.exceptions.TemplateDoesNotExist: testapp/book_confirm_delete.html
