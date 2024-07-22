@@ -1,0 +1,103 @@
+
+How to delete single record:
+
+e = Employee.objects.get(eno=6797)
+e.delete()
+
+How to delete multiple emolpyee
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+qs = Employee.objects.filter(esal__gte=19000)
+qs.count()//check the count
+qs.delete()
+
+
+How to delete all records:(Truncate operation in sql)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+qs = Employee.objects.all()
+qs.delete()
+
+Employee.objects.all().delete()
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to update filed of particular record:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+e = Employee.objects.get(eno=3199)
+
+In [14]: e = Employee.objects.get(eno=3199)
+
+In [15]: e.esal
+Out[15]: 13911.0
+
+In [16]: e.eaddr
+Out[16]: 'Cynthiastad'
+
+In [17]: e.ename
+Out[17]: 'Gloria Freeman'
+
+In [18]: e.esal = 11111
+
+In [19]: e.save()
+
+CRUD operation suing django
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+How to order queryset in sorting order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+emp_list = e = Employee.objects.all() --> Based on the insertion order
+
+1. To sort all emopyee according to ascending order of eno 
+
+    # emp_list = Employee.objects.all().order_by('eno')
+    emp_list = Employee.objects.all().order_by('-eno')  -descending
+
+3. TO get highest salaried employee objects:
+    Arrange all employee in descending order and select the first employee 
+
+    e = Employee.objects.all().order_by('-esal')[1]
+
+    e = Employee.objects.all().order_by('ename')
+
+
+4. To ignore case
+
+e = Employee(eno=1234, ename="applaLamma", esal="17555", eaddr="india")
+e.save()
+
+
+from django.db.models.functions import Lower 
+
+
+How to perform the union operation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By using union operation we can combine result of 2 or more querysets from the same model or form diffent models.
+
+
+q1 = Employee.objects.filter(esal__lt=15000)
+q2 = Employee.objects.filter(ename__startswith="J")
+q3 = q1.union(q2)
+
+
+To work with multiple records models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Student(name, mailid, addharnumber, marks)
+Teacher(name, mailid, addharnumber, subject, salary)
+
+q1 = Student.objects.all().values_list('name', 'mailid', 'addharnumber')
+q2 = Teacher.objects.all().values_list('name', 'mailid', 'addharnumber')
+
+
+q3 = q2.union(q1)
+
+Note: 
+
+get()  : to get single record
+all()  : to get all record
+filter() : to get multiple records which satsify condition
+exclue() : to get multiple records which not satsify condition

@@ -21,7 +21,7 @@ e = Employee(eno=1234, ename="Dheeraj", esal=12345, eaddr="Bengluru")
 e.save()
 
 2. 
-Employee.objects.create(eno=4432, ename="Narendra model", esal=34213, eaddr="Delhi")
+Employee.objects.create(eno=4432, ename="Narendra modi", esal=34213, eaddr="Delhi")
 
 Add multiple records:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,3 +34,5 @@ Employee(eno=4545, ename="Rohit", esal=43563, eaddr="Mumbai"),
 Employee(eno=1114, ename="virat", esal=54332, eaddr="Delhi"),
 ])
 ```
+
+
