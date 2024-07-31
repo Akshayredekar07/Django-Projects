@@ -1,0 +1,8 @@
+
+Middlewares:
+
+Preprocessing of the request:
+Postprocessing of the request:
+
+If we want to perform any activity then we should go for Middlewares.
+
