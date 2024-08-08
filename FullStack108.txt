@@ -1,0 +1,78 @@
+Working with the advanced model concept:
+
+Model Inheritance;
+
+It is very useful method and powerful feature in django:
+5 types of model Inheritance in django:
+
+1. Abstract base class model inheritance
+2. multitable inheritance 
+3. Multilevel inheritance
+4. Multiple inheritacne
+5. Proxy model inheritacne
+
+1. Abstract based class model inheritance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+class Student(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.EmailField()
+    address = models.CharField(max_length=64)
+    subject = models.CharField(max_length=64)
+    salary = models.FloatField()
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.EmailField()
+    address = models.CharField(max_length=64)
+    subject = models.CharField(max_length=64)
+    salary = models.FloatField()    
+
+
+If several model classes having common fields, then it is not recommended to write these fields in every model class seperately, because it increases length of the code and reduces redability
+
+We have to seperate those common fields into a seperate Model class which is nothing but Base class. If we extend Base class then automatically common fields will be inherited to every Child class 
+
+
+without Inheritance
+~~~~~~~~~~~~~~~~~~~
+
+
+With inheritacne
+~~~~~~~~~~~~~~~~~~~~~~
+
+class ContactInfo():
+    name = models.CharField(max_length=64)
+    email = models.EmailField()
+    address = models.CharField(max_length=64)
+    class Meta:
+    abstract = True
+
+
+class Student(ContactInfo):
+    subject = models.CharField(max_length=64)
+    salary = models.FloatField()
+
+class Teacher(ContactInfo):
+    subject = models.CharField(max_length=64)
+    salary = models.FloatField()    
+
+
+
+~~~~~~~~~~~~~~~~~~~~django-admin startproject ModelInProject1~~~~
+
+python manage.py startapp testapp
+
+Note: 
+ContactInfo class is an abstarct class and hence table won't be created
+
+
+
+
+2. Multitable inheritacne~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the base class is not abstarct then such tpye of inheritance is called multitable inheritance.
+
+This type of inheritacne is applicable at code level and db level.
+In Multitable inheritance, inside database, for both parent and child, table will be created.
+

@@ -1,8 +1,68 @@
+# Middlewares
 
-Middlewares:
+Middlewares are used for:
+- Preprocessing of the request
+- Postprocessing of the request
 
-Preprocessing of the request:
-Postprocessing of the request:
+If we want to perform any activity automatically, we should go for middlewares. It is similar to the filters concept in Java.
 
-If we want to perform any activity then we should go for Middlewares.
+## Types of Middlewares
 
+1. **CommonMiddleware**
+
+2. **CsrfViewMiddleware**
+   - Submit the form --> CSRF verification
+
+3. **AuthenticationMiddleware**
+   - `request.user`
+
+4. **SecurityMiddleware**
+   - HTTP ---> HTTPS
+
+Middleware is applicable for every incoming request and outgoing response. Based on our requirements, we can configure our own middlewares.
+
+## Middleware Structure
+
+Every customized middleware is a Python class and it is the child class of `object`.
+
+```python
+class A(object): 
+    # or simply
+class A: 
+
+
+This Python class should contain 2 mandatory methods and 3 optional methods.
+
+__init__(self, get_response):
+
+get_response is a function that can be used to send the request to the next level and to get the required response.
+This method will be executed only once at the time of creating middleware class object, which mostly happens at the time of server startup.
+
+
+__call__(self, request):
+
+This method will be executed for every request separately.
+
+
+def __call__(self, request):
+    # Code for the preprocessing of request
+    response = self.get_response(request)  # Trigger the request to the next level 
+    # Code for the postprocessing of the request
+    return response
+
+middleware classes we can define inside the middleware.py file(inside app folder)
+
+
+django-admin startproject MiddlewareProject
+
+Id we are sending the request :
+first the request will go to the middleware 
+
+In the server console
+~~~~~~~~~~~~~~~~~~~~~~
+Processing of the request
+This line added by view function
+Post processing of the request 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~

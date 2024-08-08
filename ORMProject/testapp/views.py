@@ -37,6 +37,7 @@ def retrive_view(request):
 
 
 def aggregate_view(request):
+    print(request.user)
     avg = Employee.objects.all().aggregate(Avg('esal'))
     max = Employee.objects.all().aggregate(Max('esal'))
     min = Employee.objects.all().aggregate(Min('esal'))

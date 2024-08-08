@@ -1,0 +1,20 @@
+moddleware application to show information saying application is under maintainence
+
+
+Middlware application to show meaningful response if view function raises any error:
+
+
+In the Middlware we can define the following method, which will be executed if the view function raise any error.
+
+process_exeception(self, request, execption)
+
+print(10/0) -->ZeroDivisionError
+
+
+
+Configuration of multiple Middlware classes:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can configure any no of Middlware and all these Middlware
+will be executed accoding to order delared inside the settings.py 
+
