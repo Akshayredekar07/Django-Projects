@@ -1,0 +1,127 @@
+Multi level Inheritance
+:::::::::::::::::::::::
+
+# Mutilevel inheritance
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+    age = models.IntegerField()
+
+class Employee(Person):
+    eno = models.IntegerField()
+    esal = models.FloatField()
+
+
+class Manager(Employee):
+    exp = models.IntegerField() 
+    team_size = models.IntegerField()
+
+
+# It is also multitable inheritacne only internally
+
+# Multiple inhertance
+
+class A:
+    def m1(self):
+        print("A class method")
+
+class B:
+    def m1(self):
+        print("B class method")
+
+class C(A,B):
+    pass
+
+c = C()
+c.m1() 
+
+If model class extends multiple parent classes simultaneously then such type of inheritance is called multiple inheritance
+
+
+# Multiple inheritance
+class Parent1(models.Model):
+    f1 =  models.CharField(max_length=64)
+    f2 =  models.CharField(max_length=64)
+
+class Parent2(models.Model):
+    f3 =  models.CharField(max_length=64)
+    f4 =  models.CharField(max_length=64)    
+
+
+class Child(Parent1, Parent2):
+    f5 =  models.CharField(max_length=64)
+    f6 =  models.CharField(max_length=64)    
+
+
+
+# SystemCheckError: System check identified some issues:
+
+# ERRORS:
+# testapp.Child: (models.E005) The field 'id' from parent model 'testapp.parent1' clashes with the field 'id' from parent model 'testapp.parent2'.
+
+# Note: Parent classes should not contains common fileds, otherwise we will get error 
+
+
+Model manager:
+
+We can use model manager to intract with database.
+Employee.objects ---> is the modelManager
+
+we can get model manager by using Model.objects property 
+Model.objects is of type: django.db.models.manager.Manager 
+
+employees_list = Employee.objects.all()
+
+Q1. What is the purpose of model manager?
+>> To intract with database 
+
+Q2 How to get default model manger?
+>>by using Model.objects property 
+
+Q3 Model Manager is What type?
+>> django.db.model.manager.Manager
+
+
+manager = Employee.objects 
+
+`::::::::::::::::::::::::::::::::::::::::::::`
+In [1]: from testapp.models import Employee
+
+In [2]: type(Employee.objects)
+Out[2]: django.db.models.manager.Manager
+
+In [3]:
+
+
+Q. Is it possible to create the Custom modelManager?
+>> Yes, we can Customize or create new modelManager
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+from django.db import models
+
+class ActiveEmployeeManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+    def get_senior_employees(self):
+        return self.get_queryset().filter(years_of_experience__gte=5)
+
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+    years_of_experience = models.IntegerField(default=0)
+
+    objects = models.Manager()  # The default manager
+    active_employees = ActiveEmployeeManager()  # Our custom manager
+
+    def __str__(self):
+        return self.name
+
+
+~~~~~~~~~~~~~~~~~~~~~~~
+# Get all active employees
+active_emps = Employee.active_employees.all()
+
+# Get senior active employees
+senior_emps = Employee.active_employees.get_senior_employees()        
+
+

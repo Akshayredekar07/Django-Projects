@@ -20,4 +20,6 @@ def datetime_info_view(request):
     msg=msg+' </h1><hr>'
     msg=msg+'<h1>Now the server date and time is: '+str(dt)+'</h1>'
     print(msg)
+
     return HttpResponse(msg)
+    # return render(request, 'test.html', )
