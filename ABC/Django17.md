@@ -9,8 +9,6 @@
 
 ### Process to Generate Django Forms
 
-Here’s a step-by-step guide to create a simple form for handling employee data.
-
 #### 1. **Define the Model**
 
 In `models.py`, create a model for the Employee:
